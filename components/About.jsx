@@ -34,7 +34,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-20 lg:py-28 relative bg-[#060911]">
+    <section id="about" className="py-20 lg:py-28 relative bg-[#060911] overflow-hidden">
       {/* Decorative background glow */}
       <div 
         aria-hidden="true" 
@@ -62,7 +62,7 @@ export default function About() {
           
           {/* Bio Story Card */}
           <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
-            <div className="p-7 sm:p-9 rounded-3xl bg-[#090f1d]/85 border border-slate-800/90 hover:border-sky-500/30 transition-all duration-300 shadow-xl space-y-5 h-full flex flex-col justify-between">
+            <div className="p-5 sm:p-9 rounded-3xl bg-[#090f1d]/85 border border-slate-800/90 hover:border-sky-500/30 transition-all duration-300 shadow-xl space-y-5 h-full flex flex-col justify-between">
               <div>
                 <h3 className="text-xl sm:text-2xl font-bold text-white flex items-center gap-2.5 mb-5">
                   <Code2 className="w-6 h-6 text-sky-400" />

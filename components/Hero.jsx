@@ -31,15 +31,15 @@ export default function Hero() {
       {/* Background ambient glows */}
       <div 
         aria-hidden="true" 
-        className="pointer-events-none absolute -top-48 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-sky-500/20 via-blue-600/15 to-transparent rounded-full blur-3xl -z-10"
+        className="pointer-events-none absolute -top-48 left-1/2 -translate-x-1/2 w-full max-w-[700px] h-[350px] sm:h-[500px] lg:h-[700px] bg-gradient-to-tr from-sky-500/20 via-blue-600/15 to-transparent rounded-full blur-3xl -z-10"
       />
       <div 
         aria-hidden="true" 
-        className="pointer-events-none absolute top-1/2 -right-48 w-[450px] h-[450px] bg-sky-500/10 rounded-full blur-3xl -z-10"
+        className="pointer-events-none absolute top-1/2 -right-48 w-72 sm:w-[450px] h-72 sm:h-[450px] bg-sky-500/10 rounded-full blur-3xl -z-10"
       />
       <div 
         aria-hidden="true" 
-        className="pointer-events-none absolute bottom-0 -left-48 w-[450px] h-[450px] bg-blue-600/10 rounded-full blur-3xl -z-10"
+        className="pointer-events-none absolute bottom-0 -left-48 w-72 sm:w-[450px] h-72 sm:h-[450px] bg-blue-600/10 rounded-full blur-3xl -z-10"
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -59,14 +59,16 @@ export default function Hero() {
 
             {/* Location & Name */}
             <div className="space-y-3">
-              <div className="flex items-center justify-center lg:justify-start gap-2 text-slate-400 text-sm font-medium">
-                <MapPin className="w-4 h-4 text-sky-400 shrink-0" />
-                <span className="text-slate-300 font-semibold">{profileData.location}</span>
-                <span className="text-slate-600">•</span>
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-2 gap-y-1 text-slate-400 text-xs sm:text-sm font-medium">
+                <div className="flex items-center gap-1.5">
+                  <MapPin className="w-4 h-4 text-sky-400 shrink-0" />
+                  <span className="text-slate-300 font-semibold">{profileData.location}</span>
+                </div>
+                <span className="text-slate-600 hidden sm:inline">•</span>
                 <span className="text-slate-400">Open to Remote & On-site</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-[1.1]">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-[1.1]">
                 Hi, I'm{" "}
                 <span className="text-gradient-cyan">
                   {profileData.name}
@@ -177,7 +179,7 @@ export default function Hero() {
 
           {/* Right Column: Profile Photo Card */}
           <div className="lg:col-span-5 flex justify-center w-full">
-            <div className="relative group max-w-[340px] sm:max-w-[380px] lg:max-w-[420px] w-full animate-float">
+            <div className="relative group max-w-[300px] sm:max-w-[380px] lg:max-w-[420px] w-full animate-float">
               
               {/* Outer decorative ambient glow */}
               <div 

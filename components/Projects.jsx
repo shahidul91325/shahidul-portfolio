@@ -4,11 +4,11 @@ import { Sparkles, ArrowUpRight } from "lucide-react";
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-20 lg:py-28 relative bg-[#060911]">
+    <section id="projects" className="py-20 lg:py-28 relative bg-[#060911] overflow-hidden">
       {/* Background radial glow */}
       <div 
         aria-hidden="true" 
-        className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 w-[650px] h-[650px] bg-sky-500/10 rounded-full blur-3xl -z-10" 
+        className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 w-full max-w-[650px] h-[350px] sm:h-[500px] lg:h-[650px] bg-sky-500/10 rounded-full blur-3xl -z-10" 
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

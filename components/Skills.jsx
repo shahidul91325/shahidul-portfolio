@@ -71,7 +71,7 @@ export default function Skills() {
   };
 
   return (
-    <section id="skills" className="py-20 lg:py-28 relative bg-[#060911]/95 bg-dots-pattern">
+    <section id="skills" className="py-20 lg:py-28 relative bg-[#060911]/95 bg-dots-pattern overflow-hidden">
       {/* Background glow */}
       <div 
         aria-hidden="true" 
@@ -101,7 +101,7 @@ export default function Skills() {
             return (
               <div
                 key={index}
-                className="p-6 sm:p-8 rounded-3xl bg-[#090f1d]/85 border border-slate-800/90 hover:border-sky-500/35 hover:bg-[#0c1426] transition-all duration-300 shadow-xl flex flex-col justify-between h-full group card-hover-effect"
+                className="p-5 sm:p-8 rounded-3xl bg-[#090f1d]/85 border border-slate-800/90 hover:border-sky-500/35 hover:bg-[#0c1426] transition-all duration-300 shadow-xl flex flex-col justify-between h-full group card-hover-effect"
               >
                 <div>
                   {/* Category Header */}

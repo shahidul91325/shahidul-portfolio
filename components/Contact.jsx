@@ -127,11 +127,11 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 lg:py-28 relative bg-[#060911]/95 bg-grid-pattern">
+    <section id="contact" className="py-20 lg:py-28 relative bg-[#060911]/95 bg-grid-pattern overflow-hidden">
       {/* Background ambient glow */}
       <div 
         aria-hidden="true" 
-        className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[750px] h-[500px] bg-gradient-to-t from-sky-500/10 via-blue-600/5 to-transparent rounded-full blur-3xl -z-10" 
+        className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[750px] h-[300px] sm:h-[400px] lg:h-[500px] bg-gradient-to-t from-sky-500/10 via-blue-600/5 to-transparent rounded-full blur-3xl -z-10" 
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

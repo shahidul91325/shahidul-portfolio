@@ -3,7 +3,7 @@ import { GraduationCap, Award, Clock, Building, Sparkles } from "lucide-react";
 
 export default function Education() {
   return (
-    <section id="education" className="py-20 lg:py-28 relative bg-[#060911]">
+    <section id="education" className="py-20 lg:py-28 relative bg-[#060911] overflow-hidden">
       {/* Background glow */}
       <div 
         aria-hidden="true" 
@@ -32,7 +32,7 @@ export default function Education() {
             return (
               <div
                 key={index}
-                className={`p-6 sm:p-9 rounded-3xl border transition-all duration-300 shadow-xl relative overflow-hidden card-hover-effect ${
+                className={`p-5 sm:p-9 rounded-3xl border transition-all duration-300 shadow-xl relative overflow-hidden card-hover-effect ${
                   edu.isCurrent
                     ? "bg-gradient-to-r from-[#0a1428] via-[#091122] to-[#060b16] border-sky-500/40 glow-cyan"
                     : "bg-[#090f1d]/85 border-slate-800/90 hover:border-slate-700 hover:bg-[#0c1426]"
