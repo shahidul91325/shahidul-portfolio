@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { profileData } from "@/data/profile";
 import { Menu, X, FileDown, ArrowRight } from "lucide-react";
@@ -70,23 +71,23 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-2">
             
             {/* Logo / Monogram */}
             <Link
               href="/"
               onClick={closeMenu}
-              className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded-xl p-1"
+              className="flex items-center gap-2.5 sm:gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded-xl p-1 min-w-0"
               aria-label="MD Shahidul Islam Portfolio Homepage"
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-400 via-blue-600 to-indigo-700 flex items-center justify-center text-white font-black text-base shadow-md shadow-sky-500/25 group-hover:scale-105 transition-transform">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-sky-400 via-blue-600 to-indigo-700 flex items-center justify-center text-white font-black text-sm sm:text-base shadow-md shadow-sky-500/25 group-hover:scale-105 transition-transform shrink-0">
                 <span>MSI</span>
               </div>
-              <div className="flex flex-col text-left">
-                <span className="font-bold text-base sm:text-lg text-white tracking-tight group-hover:text-sky-300 transition-colors leading-tight">
+              <div className="flex flex-col text-left min-w-0">
+                <span className="font-bold text-sm sm:text-base lg:text-lg text-white tracking-tight group-hover:text-sky-300 transition-colors leading-tight truncate">
                   {profileData.name}
                 </span>
-                <span className="text-[11px] text-sky-400 font-semibold tracking-wide">
+                <span className="text-[10px] sm:text-[11px] text-sky-400 font-semibold tracking-wide truncate">
                   Full-Stack Web Developer
                 </span>
               </div>
@@ -115,7 +116,7 @@ export default function Navbar() {
               })}
             </nav>
 
-            {/* CTA & Actions */}
+            {/* CTA & Actions — sm and above (tablet + desktop) */}
             <div className="hidden sm:flex items-center gap-3">
               <a
                 href={profileData.resumePath}
@@ -138,19 +139,36 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* Mobile / Tablet Menu Button */}
-            <div className="flex lg:hidden items-center gap-2">
-              <a
-                href={profileData.resumePath}
-                download="MD_Shahidul_Islam_Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 rounded-xl text-sky-400 bg-sky-500/10 border border-sky-500/25 text-xs font-semibold sm:hidden"
-                aria-label="Download Resume"
+            {/* Mobile-only avatar + hamburger (visible on mobile screens <sm, hidden at sm and above) */}
+            <div className="flex sm:hidden items-center gap-2 shrink-0">
+              {/* Circular profile avatar — 32-36px, object-fit cover, subtle border */}
+              <div 
+                className="relative w-[34px] h-[34px] rounded-full overflow-hidden border border-sky-400/50 ring-2 ring-sky-400/20 bg-slate-900 shrink-0" 
+                title="MD Shahidul Islam – Profile Photo"
               >
-                <FileDown className="w-4 h-4" />
-              </a>
+                <Image
+                  src={profileData.profilePhoto}
+                  alt="MD Shahidul Islam – Profile Photo"
+                  width={34}
+                  height={34}
+                  className="w-full h-full object-cover object-top"
+                  priority
+                />
+              </div>
 
+              <button
+                type="button"
+                onClick={toggleMenu}
+                className="p-2 rounded-xl text-slate-200 hover:text-white bg-slate-900/90 border border-slate-800 hover:border-sky-500/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 transition shrink-0"
+                aria-expanded={isOpen}
+                aria-label="Toggle navigation menu"
+              >
+                {isOpen ? <X className="w-5 h-5 text-sky-400" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
+
+            {/* Tablet hamburger only (sm–lg), no avatar */}
+            <div className="hidden sm:flex lg:hidden items-center gap-2">
               <button
                 type="button"
                 onClick={toggleMenu}
