@@ -6,7 +6,7 @@ export const profileData = {
   phone: "01936151282",
   linkedin: "https://www.linkedin.com/in/shahidul91325/",
   github: "https://github.com/shahidul91325",
-  resumePath: "/resume.pdf",
+  resumePath: "/Resume.pdf",
   resumeViewerPath: "/resume",
   profilePhoto: "/images/profile.png",
   headline: "Building Modern, Scalable & High-Performance Web Applications",
