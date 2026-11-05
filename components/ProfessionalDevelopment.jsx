@@ -9,7 +9,7 @@ export default function ProfessionalDevelopment() {
         title={<>Professional Development <span className="text-gradient-cyan">& Course Completion</span></>}
         description="A completed course supporting my practical full-stack engineering work."
       />
-      <article className="course-card surface-card surface-card-interactive">
+      <article className="course-card surface-card surface-card-interactive" data-reveal style={{ "--delay": "90ms" }}>
         <div className="course-art" aria-hidden="true">
           <div className="course-orbit course-orbit-one" />
           <div className="course-orbit course-orbit-two" />

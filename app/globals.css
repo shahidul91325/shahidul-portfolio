@@ -87,6 +87,31 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @keyframes float-gentle { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 .animate-float { animation: float-gentle 7s ease-in-out infinite; }
 
+/* Route transitions: React <ViewTransition> maps navigation types onto these
+   classes. Browsers without the View Transitions API simply skip them. */
+::view-transition { pointer-events: none; }
+::view-transition-old(.vt-exit) { animation: 170ms ease-in both vt-fade-out; }
+::view-transition-new(.vt-enter) { animation: 340ms cubic-bezier(.2,.8,.2,1) 110ms both vt-rise-in; }
+::view-transition-old(.vt-exit-forward) { animation: 150ms ease-in both vt-fade-out; }
+::view-transition-new(.vt-enter-forward) { animation: 430ms cubic-bezier(.2,.8,.2,1) 90ms both vt-slide-forward; }
+::view-transition-old(.vt-exit-back) { animation: 150ms ease-in both vt-fade-out; }
+::view-transition-new(.vt-enter-back) { animation: 430ms cubic-bezier(.2,.8,.2,1) 90ms both vt-slide-back; }
+@keyframes vt-fade-out { to { opacity: 0; } }
+@keyframes vt-rise-in { from { opacity: 0; translate: 0 16px; } to { opacity: 1; translate: 0 0; } }
+@keyframes vt-slide-forward { from { opacity: 0; translate: 56px 0; } to { opacity: 1; translate: 0 0; } }
+@keyframes vt-slide-back { from { opacity: 0; translate: -56px 0; } to { opacity: 1; translate: 0 0; } }
+
+/* Scroll-triggered reveal. ScrollReveal only ever adds `reveal-pending` to
+   content that starts below the fold, so nothing is hidden without scripting
+   and hydration never makes visible content disappear. The class is removed
+   once the reveal finishes so hover transforms keep working afterwards. */
+[data-reveal].reveal-pending { transition: opacity .7s ease var(--delay, 0ms), transform .7s cubic-bezier(.2,.8,.2,1) var(--delay, 0ms); }
+[data-reveal].reveal-pending:not(.is-revealed) { opacity: 0; transform: translateY(18px); }
+[data-reveal].reveal-pending:not(.is-revealed) .project-image { transform: scale(1.06); }
+[data-reveal].reveal-pending:not(.is-revealed) .case-image { transform: scale(1.06); }
+.case-image { transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+
+
 /* Phase 3: navigation, hero, and about */
 .site-header { position: fixed; z-index: 50; inset: 0 0 auto; padding: 17px 0; border-bottom: 1px solid transparent; transition: background .25s ease, border-color .25s ease, padding .25s ease, box-shadow .25s ease; }
 .site-header-scrolled { padding-block: 10px; border-color: rgba(170, 195, 234, .1); background: rgba(7, 11, 20, .84); box-shadow: 0 12px 38px -30px #000; backdrop-filter: blur(18px); }
@@ -100,8 +125,10 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .desktop-nav { display: flex; align-items: center; gap: 4px; }
 .nav-link, .mobile-nav-link { position: relative; display: inline-flex; min-height: 40px; align-items: center; padding: 0 12px; border-radius: 11px; color: #9ca9bf; font-size: .8rem; font-weight: 570; text-decoration: none; transition: color .2s ease, background .2s ease; }
 .nav-link:hover, .mobile-nav-link:hover { color: white; background: rgba(255,255,255,.045); }
+.nav-link::after, .mobile-nav-link::after { position: absolute; right: 12px; bottom: 5px; left: 12px; height: 1px; background: linear-gradient(90deg, transparent, var(--blue-400), transparent); content: ""; opacity: 0; transform: scaleX(.45); transition: opacity .22s ease, transform .3s cubic-bezier(.2,.8,.2,1); }
+.nav-link:hover::after, .mobile-nav-link:hover::after { opacity: .5; transform: scaleX(1); }
 .nav-link-active { color: #a9d3ff; }
-.nav-link-active::after { position: absolute; right: 12px; bottom: 5px; left: 12px; height: 1px; background: linear-gradient(90deg, transparent, var(--blue-400), transparent); content: ""; }
+.nav-link.nav-link-active::after, .mobile-nav-link.nav-link-active::after { opacity: 1; transform: scaleX(1); }
 .desktop-actions { display: flex; align-items: center; gap: 10px; }
 .nav-resume, .nav-contact { display: inline-flex; min-height: 40px; align-items: center; justify-content: center; gap: 8px; padding: 0 13px; border-radius: 12px; font-size: .78rem; font-weight: 650; text-decoration: none; transition: transform .2s ease, background .2s ease, border-color .2s ease; }
 .nav-resume { border: 1px solid var(--line); background: rgba(255,255,255,.025); color: #c8d5e8; }
@@ -239,8 +266,17 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .case-page { position: relative; min-height: 100vh; padding: 126px 0 78px; overflow: hidden; isolation: isolate; }
 .case-page-glow { position: absolute; z-index: -1; top: 0; left: 50%; width: 800px; height: 650px; transform: translateX(-50%); border-radius: 50%; background: rgba(33,94,187,.12); filter: blur(120px); pointer-events: none; }
 .case-container { width: min(1080px, calc(100% - 48px)); margin-inline: auto; }
-.case-back { display: inline-flex; min-height: 38px; align-items: center; gap: 8px; color: #98a9c2; font-size: .76rem; font-weight: 590; text-decoration: none; transition: color .2s ease; }
-.case-back:hover { color: #dcecff; }
+.case-back { display: inline-flex; min-height: 38px; align-items: center; gap: 8px; color: #98a9c2; font-size: .76rem; font-weight: 590; text-decoration: none; transition: color .2s ease, transform .25s cubic-bezier(.2,.8,.2,1); }
+.case-back:hover { color: #dcecff; transform: translateX(-3px); }
+
+/* Interaction polish: press feedback and gentle hover lifts on secondary surfaces */
+.button-primary:active, .button-secondary:active, .project-action:active { transform: translateY(0) scale(.985); }
+.case-stack-card { transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s ease, background .3s ease; }
+.case-stack-card:hover { transform: translateY(-4px); border-color: var(--line-strong); background: rgba(17, 29, 52, .8); }
+.tech-pill { transition: border-color .2s ease, background .2s ease, color .2s ease; }
+.tech-pill:hover { border-color: rgba(96,165,255,.3); background: rgba(56,139,255,.08); color: #e5f1ff; }
+.contact-detail-card { transition: transform .25s ease, border-color .25s ease, background .25s ease; }
+.contact-detail-card:hover { transform: translateY(-2px); border-color: rgba(96,165,255,.24); background: rgba(56,139,255,.05); }
 .case-header { max-width: 800px; margin: 33px 0 30px; }
 .case-header h1 { margin: 16px 0 0; color: var(--ink); font-size: clamp(2.7rem, 7vw, 5.1rem); font-weight: 730; letter-spacing: -.075em; line-height: 1; }
 .case-subtitle { margin: 10px 0 0; color: #9ac7ff; font-size: clamp(1rem, 2.1vw, 1.35rem); font-weight: 600; letter-spacing: -.025em; }
@@ -463,5 +499,6 @@ textarea.contact-input { min-height: 130px; resize: vertical; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
+  ::view-transition-old(*), ::view-transition-new(*), ::view-transition-group(*) { animation-duration: .01ms !important; animation-delay: 0s !important; }
 }

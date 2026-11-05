@@ -17,7 +17,7 @@ export default function Skills() {
         {skillsData.map((group, index) => {
           const Icon = categoryIcons[index];
           return (
-            <article className="skill-panel rise-in" style={{ "--delay": `${index * 75}ms` }} key={group.category}>
+            <article className="skill-panel" data-reveal style={{ "--delay": `${index * 90}ms` }} key={group.category}>
               <div className="skill-group-heading">
                 <span className="icon-tile"><Icon size={19} aria-hidden="true" /></span>
                 <div className="skill-group-title">

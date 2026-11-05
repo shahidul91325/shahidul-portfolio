@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowUpRight, FileText, Menu, X } from "lucide-react";
 import { profileData } from "@/data/profile";
 
@@ -14,29 +15,75 @@ const navLinks = [
   { name: "Contact", href: "/#contact", id: "contact" },
 ];
 
+const HOME_PATH = "/";
+const PROJECTS_PATH = "/projects";
+// Distance below the viewport top at which a section counts as the current one.
+// Matches the fixed header height plus its breathing room.
+const ACTIVE_OFFSET = 150;
+
+// Route-based active state: only project case study routes belong to "Projects".
+function routeSection(pathname) {
+  if (pathname === PROJECTS_PATH || pathname.startsWith(`${PROJECTS_PATH}/`)) return "projects";
+  return null;
+}
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("hero");
+  const [homeSection, setHomeSection] = useState("hero");
+  const pathname = usePathname();
+
+  const isHome = pathname === HOME_PATH;
+  const fallbackSection = routeSection(pathname);
+  // Exactly one item can be active: the route answer wins off the homepage,
+  // the scroll answer only applies to the homepage itself.
+  const activeSection = isHome ? homeSection : fallbackSection;
 
   useEffect(() => {
+    let frame = 0;
+    let settleTimer = 0;
+
     const updatePosition = () => {
       setScrolled(window.scrollY > 16);
-      const current = navLinks.reduce((active, link) => {
+      if (!isHome) return;
+      // Walk the sections in document order and keep the last one that has
+      // crossed the active line while still drawing inside the viewport, so a
+      // section that has scrolled fully past can never stay highlighted.
+      let current = null;
+      for (const link of navLinks) {
         const section = document.getElementById(link.id);
-        return section && section.getBoundingClientRect().top <= 150 ? link.id : active;
-      }, "hero");
-      setActiveSection(current);
+        if (!section) continue;
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= ACTIVE_OFFSET && rect.bottom > 0) current = link.id;
+      }
+      setHomeSection(current);
     };
+
+    // Recompute once now, then again after paint and after a short delay so
+    // direct loads, hash jumps, scroll restoration and image-driven layout
+    // changes all settle on the right item.
+    const scheduleUpdate = () => {
+      cancelAnimationFrame(frame);
+      window.clearTimeout(settleTimer);
+      frame = requestAnimationFrame(updatePosition);
+      settleTimer = window.setTimeout(updatePosition, 280);
+    };
+
     const closeOnEscape = (event) => event.key === "Escape" && setIsOpen(false);
+
     updatePosition();
+    scheduleUpdate();
     window.addEventListener("scroll", updatePosition, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
     window.addEventListener("keydown", closeOnEscape);
     return () => {
+      cancelAnimationFrame(frame);
+      window.clearTimeout(settleTimer);
       window.removeEventListener("scroll", updatePosition);
+      window.removeEventListener("resize", scheduleUpdate);
       window.removeEventListener("keydown", closeOnEscape);
     };
-  }, []);
+  }, [isHome]);
 
   const closeMenu = () => setIsOpen(false);
   const resumeLink = (

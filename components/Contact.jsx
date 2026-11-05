@@ -95,7 +95,7 @@ export default function Contact() {
 
       <div className="contact-layout">
         <aside className="contact-sidebar">
-          <div className="contact-panel surface-card">
+          <div className="contact-panel surface-card" data-reveal style={{ "--delay": "60ms" }}>
             <span className="eyebrow">Contact details</span>
             <h3>Reach me directly</h3>
             <p className="contact-panel-intro">Choose the channel that works best for you.</p>
@@ -126,10 +126,10 @@ export default function Contact() {
               <a href={profileData.linkedin} target="_blank" rel="noopener noreferrer"><LinkedinIcon className="w-[17px] h-[17px]" /> LinkedIn</a>
             </div>
           </div>
-          <div className="contact-aside-note"><span className="contact-aside-mark">MSI</span><p>Full-stack web development<br />Dhaka, Bangladesh</p></div>
+          <div className="contact-aside-note" data-reveal style={{ "--delay": "180ms" }}><span className="contact-aside-mark">MSI</span><p>Full-stack web development<br />Dhaka, Bangladesh</p></div>
         </aside>
 
-        <div className="contact-form-panel surface-card">
+        <div className="contact-form-panel surface-card" data-reveal style={{ "--delay": "130ms" }}>
           <div className="contact-form-heading"><span className="eyebrow">Send a message</span><h3>Tell me a little about it.</h3><p>Fields marked with * are required.</p></div>
 
           <div className={`contact-status contact-status-success ${submitStatus === "success" ? "contact-status-visible" : ""}`} role="status" aria-live="polite">
