@@ -111,16 +111,13 @@ export default function Footer() {
             © {currentYear} {profileData.name}. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <a
-              href={profileData.resumePath}
-              download="MD_Shahidul_Islam_Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href={profileData.resumeViewerPath}
               className="hover:text-sky-400 transition flex items-center gap-1 font-semibold text-slate-300"
             >
               <FileDown className="w-3.5 h-3.5 text-sky-400" />
-              <span>Resume (PDF)</span>
-            </a>
+              <span>View Resume</span>
+            </Link>
             <span>•</span>
             <span className="text-slate-400">
               Built with Next.js & Tailwind CSS

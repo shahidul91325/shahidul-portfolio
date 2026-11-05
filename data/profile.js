@@ -7,6 +7,7 @@ export const profileData = {
   linkedin: "https://www.linkedin.com/in/shahidul91325/",
   github: "https://github.com/shahidul91325",
   resumePath: "/resume.pdf",
+  resumeViewerPath: "/resume",
   profilePhoto: "/images/profile.png",
   headline: "Building Modern, Scalable & High-Performance Web Applications",
   aboutHeading: "Passionate about full-stack engineering, clean architecture, and delightful user experiences.",

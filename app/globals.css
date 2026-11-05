@@ -286,6 +286,17 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .course-meta-row span { display: inline-flex; align-items: center; gap: 7px; }
 .course-meta-row svg { color: #76b8ff; }
 .course-meta-separator { width: 3px; height: 3px; border-radius: 50%; background: #60708a; }
+.resume-page { min-height: 100vh; padding: 124px 0 72px; }
+.resume-container { width: min(1060px, calc(100% - 48px)); margin-inline: auto; }
+.resume-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin: 31px 0 22px; }
+.resume-heading-copy h1 { margin: 11px 0 0; color: var(--ink); font-size: clamp(2rem, 4.5vw, 3.3rem); font-weight: 710; letter-spacing: -.06em; line-height: 1.05; }
+.resume-heading-copy p { display: flex; align-items: center; gap: 9px; margin: 9px 0 0; color: #a3b2c8; font-size: .86rem; }
+.resume-heading-copy p span { width: 3px; height: 3px; border-radius: 50%; background: #60708a; }
+.resume-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.resume-viewer-frame { overflow: hidden; min-height: 72vh; border: 1px solid rgba(170,195,234,.16); border-radius: 18px; background: #111827; box-shadow: 0 28px 75px -50px #000; }
+.resume-iframe { display: block; width: 100%; height: 78vh; min-height: 650px; border: 0; background: #e5e7eb; }
+.resume-fallback { margin: 14px 2px 0; color: #8492a8; font-size: .75rem; line-height: 1.7; }
+.resume-fallback a { color: #9acaff; text-underline-offset: 3px; }
 
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--navy-950); }
@@ -339,6 +350,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .course-card { grid-template-columns: 1fr; }
   .course-art { min-height: 230px; }
   .course-emblem-spark { top: 25%; right: 31%; }
+  .resume-header { align-items: flex-start; flex-direction: column; }
+  .resume-actions { width: 100%; }
+  .resume-actions > * { flex: 1; }
+  .resume-viewer-frame { min-height: 63vh; border-radius: 13px; }
+  .resume-iframe { height: 68vh; min-height: 520px; }
 }
 @media (max-width: 480px) {
   .nav-inner { width: calc(100% - 32px); }
@@ -364,6 +380,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .case-image-frame { aspect-ratio: 1.2; border-radius: 16px; }
   .case-stack-grid { grid-template-columns: 1fr; }
   .case-footer { align-items: flex-start; flex-direction: column; }
+  .resume-container { width: calc(100% - 36px); }
+  .resume-actions { flex-direction: column; }
 }
 
 @media (prefers-reduced-motion: reduce) {

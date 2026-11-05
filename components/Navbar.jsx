@@ -40,9 +40,9 @@ export default function Navbar() {
 
   const closeMenu = () => setIsOpen(false);
   const resumeLink = (
-    <a href={profileData.resumePath} download="MD_Shahidul_Islam_Resume.pdf" className="nav-resume" onClick={closeMenu}>
+    <Link href={profileData.resumeViewerPath} className="nav-resume" onClick={closeMenu}>
       <FileText size={16} aria-hidden="true" /> <span>Resume</span>
-    </a>
+    </Link>
   );
 
   return (

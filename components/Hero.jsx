@@ -22,7 +22,7 @@ export default function Hero() {
           <div className="hero-actions">
             <Link href="/#contact" className="button-primary">Let&apos;s connect <ArrowRight size={17} /></Link>
             <Link href="/#projects" className="button-secondary">Explore projects <ArrowDown size={16} /></Link>
-            <a href={profileData.resumePath} download="MD_Shahidul_Islam_Resume.pdf" className="button-quiet"><FileText size={16} /> View resume</a>
+            <Link href={profileData.resumeViewerPath} className="button-quiet"><FileText size={16} /> View resume</Link>
           </div>
 
           <div className="hero-footer">
